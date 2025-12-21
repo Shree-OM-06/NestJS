@@ -55,6 +55,9 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+
+# to use envs
+npm i @nestjs/config
 ```
 ![alt text]({DCB5CE20-63A7-4BB5-A3D1-400857D6A3FF}.png)
 

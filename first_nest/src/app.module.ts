@@ -4,9 +4,18 @@ import { AppService } from './app.service';
 import { HelloModule } from './hello/hello.module';
 import { Hello1Module } from './hello1/hello1.module';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
+
 
 @Module({
-  imports: [HelloModule, Hello1Module, UserModule],
+  imports: [ConfigModule.forRoot({
+    isGlobal: true,
+    envFilePath: 'env/.env',
+  }), 
+  HelloModule, 
+  Hello1Module, 
+  UserModule
+],
   controllers: [AppController],
   providers: [AppService],
 })

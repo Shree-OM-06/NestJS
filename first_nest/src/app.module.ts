@@ -5,6 +5,7 @@ import { HelloModule } from './hello/hello.module';
 import { Hello1Module } from './hello1/hello1.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { PostsModule } from './posts/posts.module';
 
 
 @Module({
@@ -14,7 +15,7 @@ import { ConfigModule } from '@nestjs/config';
   }), 
   HelloModule, 
   Hello1Module, 
-  UserModule
+  UserModule, PostsModule
 ],
   controllers: [AppController],
   providers: [AppService],

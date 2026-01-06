@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Post } from './interfaces/post.interfaces';
 
 @Injectable()
@@ -31,9 +31,32 @@ export class PostsService {
         }
     ];
 
-    finAll(): Post[] {
+    findAll(): Post[] {
         return this.posts;
     }
 
+    findOneById(id: number): Post {
+        const singlePost=this.posts.find(post=>post.id===id);
+        if(!singlePost){
+            throw new NotFoundException(`Error 404: Post with id: ${id} is not found`)
+        }
+        return singlePost;
+    }
 
+    create(createPostData: Omit<Post,'id'| 'createdAt'>): Post {
+        const newPost: Post = {
+id: this.getNextId(),
+            ...createPostData,
+            createdAt: new Date(),
+        }
+
+       this.posts.push(newPost);
+       return newPost; 
+    }
+
+    private getNextId(): number {
+        return this.posts.length > 0 ? Math.max(...this.posts.map(post => post.id)) + 1 : 1;  
+    }
+
+    
 }
